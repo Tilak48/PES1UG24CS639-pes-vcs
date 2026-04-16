@@ -12,10 +12,10 @@ In this phase, I implemented the basic object storage system.
 It stores blobs using SHA-256 hashing and organizes them inside `.pes/objects`.
 
 ### Screenshot 1A: Test Objects Output
-![Phase1_1A](screenshots/phase1_1A.jpeg)
+![Phase1_1A](Screenshots/phase_1A.jpeg)
 
 ### Screenshot 1B: Object Storage Structure
-![Phase1_1B](screenshots/phase1_1B.jpeg)
+![Phase1_1B](Screenshots/phase_1B.jpeg)
 
 ---
 
@@ -25,10 +25,10 @@ Here, I worked on tree objects which represent directory structure.
 The tree is built from entries and then serialized and stored.
 
 ### Screenshot 2A: Test Tree Output
-![Phase2_2A](screenshots/phase2_2A.jpeg)
+![Phase2_2A](Screenshots/phase_2A (2).jpeg)
 
 ### Screenshot 2B: Raw Tree Object
-![Phase2_2B](screenshots/phase2_2B.jpeg)
+![Phase2_2B](Screenshots/phase_2B.jpeg)
 
 ---
 
@@ -38,10 +38,10 @@ In this phase, I implemented the staging area (index).
 It keeps track of files that are added before committing.
 
 ### Screenshot 3A: Init → Add → Status
-![Phase3_3A](screenshots/phase3_3A.jpeg)
+![Phase3_3A](Screenshots/phase_3A.jpeg)
 
 ### Screenshot 3B: Index File Content
-![Phase3_3B](screenshots/phase3_3B.jpeg)
+![Phase3_3B](Screenshots/phase_3B.jpeg)
 
 ---
 
@@ -51,13 +51,13 @@ This phase handles commit creation and history tracking.
 Each commit stores metadata like author, message, and tree reference.
 
 ### Screenshot 4A: Log Output
-![Phase4_4A](screenshots/phase4_4A.jpeg)
+![Phase4_4A](Screenshots/phase_4A.jpeg)
 
 ### Screenshot 4B: Object Growth
-![Phase4_4B](screenshots/phase4_4B.jpeg)
+![Phase4_4B](Screenshots/phase_4B.jpeg)
 
 ### Screenshot 4C: HEAD and Branch Reference
-![Phase4_4C](screenshots/phase4_4C.jpeg)
+![Phase4_4C](Screenshots/phase_4C.jpeg)
 
 ---
 
@@ -65,7 +65,7 @@ Each commit stores metadata like author, message, and tree reference.
 
 This shows that all components (object, tree, index, commit) are working together.
 
-![Final](screenshots/final.jpeg)
+![Final](Screenshots/phase_4A.jpeg)
 
 ---
 
