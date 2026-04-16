@@ -25,7 +25,7 @@ Here, I worked on tree objects which represent directory structure.
 The tree is built from entries and then serialized and stored.
 
 ### Screenshot 2A: Test Tree Output
-![Phase2_2A](Screenshots/phase_2A.jpeg)
+![Phase 2A](./Screenshots/phase_2A.jpeg)
 
 ### Screenshot 2B: Raw Tree Object
 ![Phase2_2B](Screenshots/phase_2B.jpeg)
