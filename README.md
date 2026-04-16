@@ -1,8 +1,8 @@
 # PES-VCS Project
 
 ## Student Details
-Name: Soumya  
-SRN: PES1UG24CS628  
+Name: Tilak R Biradar
+SRN: PES1UG24CS639 
 
 ---
 
@@ -72,31 +72,25 @@ This shows that all components (object, tree, index, commit) are working togethe
 ## Phase 5 & 6: Analysis Questions
 
 ### Q5.1 Branch & Checkout
-In this system, a branch is basically a file that stores the latest commit hash.  
-When we do checkout, we update the HEAD to point to that branch and change the working directory to match the files of that commit.
+To implement pes checkout <branch>, the system reads the commit hash from .pes/refs/heads/<branch>, updates HEAD to point to that branch, and loads the corresponding commit and its tree from the object store. The working directory is then updated to match this tree by creating required files and directories, overwriting changed files, and deleting extra ones. This operation is complex because it requires reconstructing the entire directory structure while safely handling overwrites and preventing data loss.
 
----
-
+ ---
+ 
 ### Q5.2 Switching Branches
-Before switching branches, we should check if there are any unsaved changes.  
-If there are changes in the working directory, switching should not be allowed.  
-This can be checked by comparing the working directory with the index and the index with HEAD.
+A dirty working directory is detected by comparing the working directory with the index and the target branch. First, if a file in the working directory differs from the index, it means it has uncommitted changes. Then, if that same file also differs between the index and the target branch’s tree, a conflict exists. In such cases, checkout must be refused to prevent loss of uncommitted changes.
 
 ---
 
 ### Q5.3 Detached HEAD
-Detached HEAD means HEAD is pointing directly to a commit instead of a branch.  
-If we make commits in this state, they are not linked to any branch and may be lost unless we create a new branch.
+In a detached HEAD state, HEAD points directly to a commit instead of a branch. Any new commits made in this state are not referenced by any branch, making them unreachable once the user switches branches. These commits can still be recovered by creating a new branch at that commit or by using the commit hash to reattach and then saving it with a branch.
 
 ---
 
 ### Q6.1 Garbage Collection
-Garbage collection removes objects that are no longer used.  
-We start from branch heads and traverse all commits, trees, and blobs.  
-Any object that is not reachable from these is considered unused and can be deleted.
+Garbage collection can be implemented using a mark-and-sweep algorithm. Starting from all branch heads and HEAD, the system traverses commits, trees, and blobs, marking all reachable objects using a hash set. After traversal, any unmarked objects are deleted as they are unreachable. For a repository with 100,000 commits and 50 branches, due to shared history, approximately 300,000 to 500,000 objects would be visited.
 
 ---
 
-### Q6.2 GC Race Condition
-If garbage collection runs at the same time as a commit, it might delete objects that are still being created.  
-This can cause errors. Git avoids this by using locking and safe file operations.
+### Q6.2 GC Race ConditionRunning garbage collection concurrently with a commit operation is dangerous because of race conditions. While GC is identifying unreachable objects, a new commit may be in the process of referencing them. If GC deletes such objects prematurely, the commit will reference missing data, causing corruption. Git avoids this using locking mechanisms, immutable objects, delayed deletion, and reflog protection to ensure objects are not removed while still in use.
+
+---
